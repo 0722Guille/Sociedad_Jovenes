@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title  %}
+Detalles
+
+
+{% endblock  %}
+
+{% block content  %}
+
+<h1>Detalle de Miembros</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Miembros</th>
+            <th>Masculino</th>
+            <th>Femenino</th>
+            <th>Activo</th>
+            <th>Inactivo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{total_miembros}}</td>
+            <td>{{total_masculino}}</td>
+            <td>{{total_femenino}}</td>
+            <td>{{total_activo}}</td>
+            <td>{{total_inactivo}}</td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+{% endblock  %}

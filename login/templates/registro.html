@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+Registrar Usuario
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<div style="text-align: center;">
+    <h1>Registrar Usuario</h1>
+
+    <form method="post" style="max-width: 400px; margin: 0 auto;">
+        {% csrf_token %}
+        <div style="margin-bottom: 10px;">
+            <label for="id_usuario" style="display: block; font-weight: bold;">Usuario:</label>
+            <input type="text" id="id_usuario" name="usuario" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="id_password" style="display: block; font-weight: bold;">Contraseña:</label>
+            <input type="password" id="id_password" name="contraseña" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Registrar</button>
+    </form>
+    
+</div>
+
+{% endblock %}
