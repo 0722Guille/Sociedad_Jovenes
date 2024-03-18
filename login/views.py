@@ -30,3 +30,8 @@ def registro_usuario(request):
             user.save()
             messages.success(request, '¡Usuario registrado exitosamente!')
     return render(request, 'registro.html')
+
+
+def listadoUsuario(request):
+    usuarios= User.objects.all()
+    return render(request,'listadoUsuario.html',{'usuarios':usuarios})

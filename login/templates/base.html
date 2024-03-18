@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static "css/base.css" %}">
     <link rel="stylesheet" href="{% static "css/miembro.css" %}">
    <link rel="stylesheet" href="{% static "css/detallemiembro.css"%}"> 
+   <link rel="stylesheet" href="{% static "css/detalleUsuario.css" %}">
     <title>
         {% block title %}
         {% endblock %}
@@ -30,7 +31,12 @@
                 <li><a href="/detalleMiembro/">Detalle</a></li>
             </ul>
         </li>
-        <li><a href="/registro_usuario">Registro</a></li>
+        <li><a href="/registro_usuario">Registro</a>
+            <ul>
+                <li><a href="/listadoUsuario">Listado</a></li>
+            </ul>
+        </li>
+        
 
         <li><a href="/cerrarsesion">Cerrar Sesión</a></li> 
     </ul>
