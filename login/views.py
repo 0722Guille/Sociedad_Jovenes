@@ -32,6 +32,6 @@ def registro_usuario(request):
     return render(request, 'registro.html')
 
 
-def listadoUsuario(request):
+def listaUsuario(request):
     usuarios= User.objects.all()
-    return render(request,'listadoUsuario.html',{'usuarios':usuarios})
+    return render(request,'listaUsuario.html',{'usuarios':usuarios})

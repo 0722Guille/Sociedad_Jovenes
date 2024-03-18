@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Listado de Usuarios
+{% endblock %}
+
+{% block content %}
+
+<h1>Listado de Usuarios</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Acciones</th>  <!-- Cambié "Password" a "Acciones" para evitar mostrar contraseñas en texto plano -->
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.username }}</td>
+                <td><!-- Aquí puedes agregar botones de acciones, enlaces, etc., para interactuar con los usuarios --></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
