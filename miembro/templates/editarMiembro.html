@@ -1,0 +1,53 @@
+{% comment %} {% extends "base.html" %}
+
+{% block title %}
+Editar Miembro
+{% endblock %}
+
+{% block content %}
+
+<script>
+    function editMiembro(idcodigo) {
+      console.log("ID del miembro:", idcodigo);
+      document.getElementById('idcodigo').value = idcodigo;
+  }
+  
+  function editMiembro(idcodigo) {
+    alert("Se ha llamado a la función editMiembro con ID: " + idcodigo);
+    document.getElementById('idcodigo').value = idcodigo;
+  }
+  
+   
+    
+        
+  </script>
+
+<h1>Editar Miembro</h1>
+<br>
+
+<form action="/editarMiembro/" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <label for="idcodigo">Código de Miembro:</label>
+            <input type="number" name="idcodigo" id="idcodigo" value="{{ miembro.codigo | default:'0' }}">
+
+
+            
+
+            <label for="editNombre" class="form-label">Nombre</label>
+            <input type="text" id="editNombre" name="editNombre" class="form-control">
+            <label for="editApellido" class="form-label">Apellido</label>
+            <input type="text" id="editApellido" name="editApellido" class="form-control">
+        </div>
+        <div class="col">
+            <!-- Additional fields can be added here -->
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>
+
+
+
+
+{% endblock %} {% endcomment %}

@@ -11,14 +11,14 @@ Miembro
 
 
 {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tag }}">
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tag }}">
+  {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 
-<!-- Modal -->
+<!-- Agregar Miembro -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
@@ -39,7 +39,7 @@ Miembro
               <input type="text" name='apellido' id='apellido' class='form-control' placeholder="Apellido" required>
               <label for="direccion" class='form-label'>Dirección</label>
               <input type="text" name='direccion' id='direccion' class='form-control' placeholder="Dirección" required>
-            
+
               <label for="rol" class='form-label'>Rol</label> <br>
               <select name="rol" id="rol" required>
                 <option>--Seleccione rol--</option>
@@ -62,41 +62,41 @@ Miembro
 
               <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
               <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class='form-control' required>
-              
+
             </div>
 
             <div class='col'>
 
               <label for="Telefono" class='form-label'>Telefono</label>
               <input type="number" name='telefono' id='telefono' class='form-control' placeholder="##########" required>
-            
-              
-              <label for="imagen">Imagen</label> <br> 
+
+
+              <label for="imagen">Imagen</label> <br>
               <input type="file" name='imagen' id='imagen' required> <br> <br>
               <label for="estado">Estado</label> <br>
-            
+
               <select name="estado" id="estado" required>
-                <option>--Seleccione estado--</option>
+                <option>--Seleccione Estado--</option>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
                 <option value="Suspendido">Suspendido</option>
-              </select> 
-              <br>  <br>
+              </select>
+              <br> <br>
 
 
               <label for="genero">Género</label> <br>
               <select name="genero" id="genero">
-                <option>--Seleccione género--</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
+                <option>--Seleccione Género--</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
               </select>
-              
-              
+
+
             </div>
 
           </div>
 
-         
+
 
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -111,25 +111,80 @@ Miembro
 </div>
 
 
-{% comment %} <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button> {% endcomment %}
+
+
 
 <!-- Editar Miembro -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="editMiembro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Miembro</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <form action="/editarMiembro/" method="post">
+          {% csrf_token %}
+          <input style="display: none;" type="number" name="idcodigo" id="idcodigo" class="form-control">
+          
+          <div class="row">
+            <div class="col">
+              <label for="editNombre" class="form-label">Nombre</label>
+              <input type="text" id="editNombre" name="editNombre" class="form-control">
+              <label for="editApellido" class="form-label">Apellido</label>
+              <input type="text" id="editApellido" name="editApellido" class="form-control">
+              <label for="editDireccion">Dirección</label>
+              <input type="text" id="editDireccion" name="editDireccion" class="form-control">
+              <label for="editRol">Rol</label>
+              <select id="editRol" name="editRol" class="form-select" onchange="mostrarAlertaRol(this)">
+                <option value="">-- Seleccione rol --</option>
+                <option value="Líder">Líder</option required>
+                <option value="Colíder">Colíder</option required>
+                <option value="Adoradora">Adoradora</option required>
+                <option value="Tesorera">Tesorera</option required>
+                <option value="Secretaria ">Secretaria </option required>
+                <option value="Encargado de alabanza">Encargado de alabanza</option required>
+                <option value="Musico pianista">Musico pianista</option required>
+                <option value="Musico guitarrista ">Musico guitarrista </option required>
+                <option value="Musico baterista">Musico baterista</option required>
+                <option value="Encargado Multimedia">Encargado Grabación</option required>
+                <option value="Encargado Grabación ">Musico baterista</option required>
+                <option value="Encargado Sonido">Encargado Sonido</option required>
+                <option value="Encargado de evangelismo">Encargado de evangelismo</option required>
+                <option value="Otro">Otros</option>
+              </select>
+              {% comment %} <label for="editFechaNacimiento">Fecha de Nacimiento</label>
+              <input type="date" id="editFechaNacimiento" name="editFechaNacimiento" class="form-control"> {% endcomment %}
+            </div>
+            
+            <div class="col">
+              <label for="editNumero">Telefono</label>
+              <input type="number" id="editNumero" name="editNumero" class="form-control">
+            
+              <label for="editEstado">Estado</label>
+              <select name="editEstado" id="editEstado" class="form-select">
+                <option value="">-- Seleccione Estado --</option>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+                <option value="Suspendido">Suspendido</option>
+              </select>
+              <label for="editGenero">Género</label>
+              <select name="editGenero" id="editGenero" class="form-select">
+                <option value="">--Seleccione Género--</option>
+                <label for="genero">Género</label> <br>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                
+              </select>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -148,7 +203,46 @@ Miembro
 
 
 
-<!-- Button trigger modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Button para agregar Miembro -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Agregar Miembro
 </button>
@@ -156,24 +250,26 @@ Miembro
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p id="modal-message"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-        </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-message"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
-  
+</div>
+
+
+
 
 
 
@@ -198,6 +294,7 @@ Miembro
     <tbody>
       {% for miembro in miembros %}
       <tr>
+        <td>{{miembro.codigo}}</td>
         <td>{{ forloop.counter }}</td>
         <td>{{ miembro.nombre }}</td>
         <td>{{ miembro.apellido }}</td>
@@ -207,28 +304,41 @@ Miembro
         <td>{{miembro.estado}}</td>
         <td>{{miembro.genero}}</td>
         <td>{{miembro.fecha_nacimiento}}</td>
-        
-
-<td>
-  {% if miembro.imagen %}
-    <img src="{{ miembro.imagen.url }}" alt="{{ miembro.nombre }} {{ miembro.apellido }}" style="max-width: 115px; max-height: 115px;">
-{% else %}
-    Sin imagen
-{% endif %}
-</td>
 
 
-</td>
-        <td><a href="eliminarmiembro/{{miembro.codigo}}" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-        </svg></a>
+        <td>
+          {% if miembro.imagen %}
+          <img src="{{ miembro.imagen.url }}" alt="{{ miembro.nombre }} {{ miembro.apellido }}"
+            style="max-width: 115px; max-height: 115px;">
+          {% else %}
+          Sin imagen
+          {% endif %}
+        </td>
 
-        
-        {% comment %} <a href="/editarMiembro/">Editar</a> {% endcomment %}
+
+        </td>
+        <td><a href="eliminarmiembro/{{miembro.codigo}}" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg"
+              width="28" height="28" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+              <path
+                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+            </svg></a>
+
+
+        </td>
+
+        <td>
+
       
 
-      </td>
-        
+          <button
+            onclick="editMiembro('{{miembro.codigo}}','{{miembro.nombre}}','{{miembro.apellido}}','{{miembro.direccion}}','{{miembro.rol}}','{{miembro.fecha_nacimiento}}','{{miembro.telefono}}','{{miembro.estado}}','{{miembro.genero}}')"
+            type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMiembro">
+            Editar
+          </button>
+
+
+        </td>
+
 
 
       </tr>
@@ -237,7 +347,10 @@ Miembro
   </table>
 </div>
 
-<!-- Rest of your HTML -->
+
+<script>
+  
+</script>
 
 
 {% endblock %}

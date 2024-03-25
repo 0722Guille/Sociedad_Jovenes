@@ -73,3 +73,33 @@ def detalleMiembro(request):
         'total_activo': total_activo,
         'total_inactivo': total_inactivo
     })
+    
+def editarMiembro(request):
+    if request.method == 'POST':
+        idcodigo = request.POST['idcodigo']
+        nombre = request.POST['editNombre']
+        apellido = request.POST['editApellido']
+        rol= request.POST['editRol']
+        telefono= request.POST['editNumero']
+        
+        estado= request.POST['editEstado']
+        genero= request.POST['editGenero']
+        
+        
+        # Actualizar los datos del miembro
+        miembro = Miembro.objects.get(pk=idcodigo)
+        miembro.nombre = nombre
+        miembro.apellido = apellido
+        miembro.rol= rol
+        miembro.estado= estado
+        miembro.telefono=telefono
+       
+        miembro.genero=genero
+        
+        miembro.save()
+        
+        # Redireccionar a alguna página de éxito o detalle del miembro editado
+        return redirect('miembro')
+    else:
+        # Si la solicitud no es POST, simplemente renderiza el formulario
+        return render(request, 'editarMiembro.html')
