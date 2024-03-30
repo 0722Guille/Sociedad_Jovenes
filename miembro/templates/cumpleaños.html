@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title  %}
+Cumpleaños
+
+{% endblock  %}
+
+{% block content  %}
+
+<h1>Todos los cumpleaños</h1>
+
+<form method="GET">
+    <label for="mes">Seleccione un mes:</label>
+    <select name="mes" id="mes">
+        <option value="">Todos los meses</option>
+        <option value="1">Enero</option>
+        <option value="2">Febrero</option>
+        <option value="3">Marzo</option>
+        <option value="4">Abril</option>
+        <option value="5">Mayo</option>
+        <option value="6">Junio</option>
+        <option value="7">Julio</option>
+        <option value="8">Agosto</option>
+        <option value="9">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+
+    </select>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<br> <br>
+
+<h1>Lista de Miembro en en su cumpleaños</h1>
+
+{% if mes_actual%}
+<h2>Mes: {{mes_actual}}</h2>
+
+{% endif %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha de nacimiento</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for miembro  in miembros_cumpleaños %}
+        <tr>
+            <td>{{miembro.nombre}}</td>
+            <td>{{miembro.apellido}}</td>
+            <td>{{ miembro.fecha_nacimiento|date:"d/m/Y" }}</td>
+        </tr>
+        
+        
+        
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+{% endblock  %}

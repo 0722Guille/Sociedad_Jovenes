@@ -103,3 +103,14 @@ def editarMiembro(request):
     else:
         # Si la solicitud no es POST, simplemente renderiza el formulario
         return render(request, 'editarMiembro.html')
+
+def cumpleaños(request):
+    
+    mes_actual= request.GET.get('mes')
+    
+    if mes_actual:
+        miembros_cumpleaños = Miembro.objects.filter(fecha_nacimiento__month=mes_actual)
+    
+    else:
+        miembros_cumpleaños= Miembro.objects.all()
+    return render(request, 'cumpleaños.html', {'miembros_cumpleaños': miembros_cumpleaños, 'mes_actual': mes_actual})
